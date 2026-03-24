@@ -37,6 +37,8 @@ function Login() {
     }
     if (location.state?.email) {
       setFormData(prev => ({ ...prev, email: location.state.email }));
+      // Clear the state so the email doesn't persist on refresh/next visit
+      window.history.replaceState({}, document.title);
     }
   }, [location.state]);
 
@@ -234,6 +236,7 @@ function Login() {
                     value={formData.email}
                     onChange={handleChange}
                     required
+                    autoComplete="off"
                     className="w-full bg-transparent outline-none text-slate-700 placeholder:text-slate-400"
                   />
                 </div>
@@ -253,6 +256,7 @@ function Login() {
                     value={formData.password}
                     onChange={handleChange}
                     required
+                    autoComplete="new-password"
                     className="w-full bg-transparent outline-none text-slate-700 placeholder:text-slate-400"
                   />
                   <button

@@ -444,48 +444,6 @@ function ContactPage() {
         </div>
       </section>
 
-      {/* Map Section */}
-      <section className="py-16 lg:py-20 bg-slate-50">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">Find Us in <span className="text-purple-600">Dubai</span></h2>
-            <p className="mt-4 text-lg text-slate-600">Visit our flagship location in the heart of the city</p>
-          </div>
-
-          <div className="rounded-3xl overflow-hidden shadow-xl border border-slate-200">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d462560.6827671385!2d54.89784791995288!3d25.07501270393265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43496ad9c645%3A0xbde66e5084295162!2sDubai%20Marina%2C%20Dubai%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2s!4v1709824000000!5m2!1sen!2s"
-              width="100%"
-              height="400"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Rentex Dubai Location"
-              className="w-full"
-            />
-          </div>
-
-          <div className="mt-8 grid sm:grid-cols-3 gap-4">
-            <div className="bg-white rounded-2xl p-4 text-center border border-slate-200">
-              <Building2 className="h-5 w-5 text-purple-600 mx-auto mb-2" />
-              <p className="font-medium">Dubai Marina</p>
-              <p className="text-sm text-slate-500">Main Showroom</p>
-            </div>
-            <div className="bg-white rounded-2xl p-4 text-center border border-slate-200">
-              <Globe2 className="h-5 w-5 text-purple-600 mx-auto mb-2" />
-              <p className="font-medium">DXB Airport</p>
-              <p className="text-sm text-slate-500">Terminal 1 & 3</p>
-            </div>
-            <div className="bg-white rounded-2xl p-4 text-center border border-slate-200">
-              <Award className="h-5 w-5 text-purple-600 mx-auto mb-2" />
-              <p className="font-medium">Palm Jumeirah</p>
-              <p className="text-sm text-slate-500">Atlantis Hotel</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* FAQ Section */}
       <section className="py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">

@@ -5,7 +5,6 @@ import About from "./components/About";
 import Services from "./components/Services";
 import Contact from "./components/Contact";
 import Login from "./components/Login";
-import MyRentals from "./components/MyRentals";
 import BookingPage from "./components/BookingPage";
 import BrowseCars from "./components/BrowseCars";
 import Signup from "./components/Signup";
@@ -31,7 +30,6 @@ import PaymentInvoices from "./admin/pages/PaymentInvoices";
 import Reports from "./admin/pages/Reports";
 import Reviews from "./admin/pages/Reviews";
 import Notifications from "./admin/pages/Notifications";
-import Support from "./admin/pages/Support";
 import Settings from "./admin/pages/Settings";
 import AdminAddCar from "./admin/pages/AdminAddCar";
 import AdminLogin from "./admin/pages/AdminLogin";
@@ -98,14 +96,14 @@ function App() {
             </PublicLayout>
           }
         />
-        <Route
+        {/* <Route
           path="/my-rentals"
           element={
             <PublicLayout>
               <MyRentals />
             </PublicLayout>
           }
-        />
+        /> */}
         <Route
           path="/contact"
           element={
@@ -183,7 +181,6 @@ function App() {
           <Route path="reports" element={<Reports />} />
           <Route path="reviews" element={<Reviews />} />
           <Route path="notifications" element={<Notifications />} />
-          <Route path="support" element={<Support />} />
           <Route path="settings" element={<Settings />} />
         </Route>
 

@@ -87,9 +87,7 @@ function UserReport() {
       return;
     }
 
-    // Prepare payload (without the file for now; we'll handle file separately or convert to base64)
-    // For simplicity, we'll send text fields only and ignore file in this example.
-    // If you want to send files, you'd need to use FormData and set appropriate headers.
+    // Prepare payload
     const payload = {
       fullName: formData.fullName,
       email: formData.email,
@@ -151,25 +149,28 @@ function UserReport() {
   const clearFile = () => {
     setFormData(prev => ({ ...prev, attachments: null }));
     setFileName('');
-    // Reset file input value
     const fileInput = document.getElementById('attachments');
     if (fileInput) fileInput.value = '';
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50/30 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <Flag className="h-12 w-12 text-red-500 mx-auto mb-4" />
-          <h1 className="text-3xl font-bold text-gray-900">Report a Challenge</h1>
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl shadow-lg mb-4">
+            <Flag className="h-8 w-8 text-purple-600" />
+          </div>
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-900 to-purple-600 bg-clip-text text-transparent">
+            Report a Challenge
+          </h1>
           <p className="mt-2 text-gray-600">
             We're sorry you experienced an issue. Please provide details so we can resolve it quickly.
           </p>
         </div>
 
         {/* Form Card */}
-        <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 md:p-8">
+        <div className="bg-white rounded-2xl shadow-lg border border-purple-100 p-6 md:p-8">
           {/* Status Messages */}
           {formStatus.submitted && formStatus.success && (
             <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-xl flex items-start gap-3">
@@ -195,7 +196,7 @@ function UserReport() {
             {/* Full Name */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Full Name <span className="text-red-500">*</span>
+                Full Name <span className="text-purple-500">*</span>
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -207,8 +208,8 @@ function UserReport() {
                   value={formData.fullName}
                   onChange={handleChange}
                   required
-                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl focus:ring-red-500 focus:border-red-500"
-                  placeholder="John Doe"
+                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl focus:ring-purple-500 focus:border-purple-500"
+                  placeholder=""
                 />
               </div>
             </div>
@@ -216,7 +217,7 @@ function UserReport() {
             {/* Email */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Email Address <span className="text-red-500">*</span>
+                Email Address <span className="text-purple-500">*</span>
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -228,8 +229,8 @@ function UserReport() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl focus:ring-red-500 focus:border-red-500"
-                  placeholder="john@example.com"
+                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl focus:ring-purple-500 focus:border-purple-500"
+                  placeholder="abdi@example.com"
                 />
               </div>
             </div>
@@ -248,7 +249,7 @@ function UserReport() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl focus:ring-red-500 focus:border-red-500"
+                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl focus:ring-purple-500 focus:border-purple-500"
                   placeholder="+971 50 123 4567"
                 />
               </div>
@@ -268,7 +269,7 @@ function UserReport() {
                   name="incidentDate"
                   value={formData.incidentDate}
                   onChange={handleChange}
-                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl focus:ring-red-500 focus:border-red-500"
+                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl focus:ring-purple-500 focus:border-purple-500"
                 />
               </div>
             </div>
@@ -276,14 +277,14 @@ function UserReport() {
             {/* Report Category */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Category <span className="text-red-500">*</span>
+                Category <span className="text-purple-500">*</span>
               </label>
               <select
                 name="reportCategory"
                 value={formData.reportCategory}
                 onChange={handleChange}
                 required
-                className="block w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-red-500 focus:border-red-500 bg-white"
+                className="block w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-purple-500 focus:border-purple-500 bg-white"
               >
                 <option value="">Select a category</option>
                 {categories.map(cat => (
@@ -302,7 +303,7 @@ function UserReport() {
                 name="subject"
                 value={formData.subject}
                 onChange={handleChange}
-                className="block w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-red-500 focus:border-red-500"
+                className="block w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-purple-500 focus:border-purple-500"
                 placeholder="e.g., Booking not confirmed"
               />
             </div>
@@ -310,7 +311,7 @@ function UserReport() {
             {/* Description */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Detailed Description <span className="text-red-500">*</span>
+                Detailed Description <span className="text-purple-500">*</span>
               </label>
               <div className="relative">
                 <div className="absolute top-3 left-3 pointer-events-none">
@@ -322,7 +323,7 @@ function UserReport() {
                   onChange={handleChange}
                   required
                   rows="5"
-                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl focus:ring-red-500 focus:border-red-500 resize-none"
+                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl focus:ring-purple-500 focus:border-purple-500 resize-none"
                   placeholder="Please provide as much detail as possible (e.g., date, time, car model, booking reference, etc.)"
                 />
               </div>
@@ -352,7 +353,7 @@ function UserReport() {
                     <button
                       type="button"
                       onClick={clearFile}
-                      className="text-red-500 hover:text-red-700"
+                      className="text-purple-500 hover:text-purple-700"
                     >
                       <X className="h-4 w-4" />
                     </button>
@@ -373,7 +374,7 @@ function UserReport() {
                 checked={formData.agreeToTerms}
                 onChange={handleChange}
                 required
-                className="mt-1 w-4 h-4 rounded border-gray-300 text-red-600 focus:ring-red-500"
+                className="mt-1 w-4 h-4 rounded border-gray-300 text-purple-600 focus:ring-purple-500"
               />
               <label htmlFor="terms" className="text-sm text-gray-600">
                 I confirm that the information provided is accurate and I consent to the processing of my data
@@ -385,7 +386,7 @@ function UserReport() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-4 rounded-xl font-semibold hover:from-red-700 hover:to-red-800 transition-all hover:-translate-y-0.5 shadow-lg shadow-red-600/20 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full bg-gradient-to-r from-purple-600 to-purple-600 text-white py-4 rounded-xl font-semibold hover:from-purple-700 hover:to-purple-700 transition-all hover:-translate-y-0.5 shadow-lg shadow-purple-600/20 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {isSubmitting ? (
                 <>
@@ -404,7 +405,7 @@ function UserReport() {
 
         {/* Help Text */}
         <div className="mt-6 text-center text-sm text-gray-500">
-          <p>For urgent matters, please call our 24/7 support line: <span className="font-medium">+971 4 123 4567</span></p>
+          <p>For urgent matters, please call our 24/7 support line: <span className="font-medium text-purple-600">+254 275 682 71</span></p>
         </div>
       </div>
     </div>

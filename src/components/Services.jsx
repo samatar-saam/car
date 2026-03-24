@@ -1,555 +1,644 @@
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import {
-  Sparkles,
-  ArrowRight,
-  Crown,
-  Plane,
-  HeadphonesIcon,
-  Briefcase,
-  CalendarCheck,
-  MapPinned,
-  ShieldCheck,
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  Car, 
+  Calendar, 
+  MapPin, 
+  Clock, 
+  Shield, 
+  CreditCard, 
+  Star, 
+  ChevronRight, 
   CheckCircle2,
-  Clock3,
-  CarFront,
-  Star,
-  HeartHandshake,
-  BadgeCheck,
-  Gem,
+  Phone,
+  Mail,
+  ArrowRight,
+  Sparkles,
   Users,
-  Route,
+  Wrench,
+  Navigation,
+  Coffee,
+  Award,
+  TrendingUp,
+  Settings,
+  Gift,
+  Menu,
+  X,
+  User,
+  Zap,
+  ThumbsUp,
+  Globe,
+  Headphones,
+  Camera,
+  Gauge,
+  Fuel,
+  Bluetooth,
+  Wind,
+  Smartphone,
+  Download,
+  Share2,
+  Heart,
+  Filter,
   Facebook,
   Twitter,
   Instagram,
-  Linkedin,
-  Phone,
-  Mail,
-  MapPin,
-  Car,
-} from "lucide-react";
+  Linkedin
+} from 'lucide-react';
 
-const services = [
-  {
-    icon: Crown,
-    title: "Luxury Car Rentals",
-    description:
-      "Choose from a refined fleet of premium vehicles designed for comfort, prestige, and unforgettable travel experiences.",
-  },
-  {
-    icon: Briefcase,
-    title: "Corporate Mobility",
-    description:
-      "Professional rental solutions for executives, meetings, business travel, and client transportation.",
-  },
-  {
-    icon: Plane,
-    title: "Airport Transfers",
-    description:
-      "Enjoy smooth airport pickup and drop-off services with elegant vehicles and punctual premium support.",
-  },
-  {
-    icon: CalendarCheck,
-    title: "Flexible Booking Plans",
-    description:
-      "Reserve by day, weekend, or extended duration with flexible rental options tailored to your schedule.",
-  },
-  {
-    icon: MapPinned,
-    title: "City & Destination Travel",
-    description:
-      "Move confidently across the city or to your destination with premium comfort, style, and convenience.",
-  },
-  {
-    icon: HeadphonesIcon,
-    title: "24/7 Concierge Support",
-    description:
-      "Our support team is always available to assist with reservations, guidance, and customer care.",
-  },
-];
+const CarRentalServices = () => {
+  const [activeTab, setActiveTab] = useState('rental');
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showBookingModal, setShowBookingModal] = useState(false);
+  const [selectedService, setSelectedService] = useState(null);
 
-const highlights = [
-  "Premium vehicles selected for comfort and status",
-  "Fast and polished booking experience",
-  "Reliable service for business and lifestyle travel",
-  "Professional support before and after your reservation",
-  "Flexible rental durations and pickup options",
-  "High standards of cleanliness, presentation, and care",
-];
+  const categories = [
+    { id: 'all', label: 'All Services', icon: <Filter className="w-4 h-4" /> },
+    { id: 'daily', label: 'Daily Rental', icon: <Calendar className="w-4 h-4" /> },
+    { id: 'longterm', label: 'Long Term', icon: <TrendingUp className="w-4 h-4" /> },
+    { id: 'luxury', label: 'Luxury Fleet', icon: <Sparkles className="w-4 h-4" /> },
+    { id: 'business', label: 'Business', icon: <Users className="w-4 h-4" /> }
+  ];
 
-const process = [
-  {
-    number: "01",
-    title: "Browse the Fleet",
-    text: "Explore premium vehicles and choose the one that matches your journey, style, and expectations.",
-  },
-  {
-    number: "02",
-    title: "Book in Minutes",
-    text: "Reserve your preferred car through a clean and modern flow designed for speed and simplicity.",
-  },
-  {
-    number: "03",
-    title: "Confirm Your Schedule",
-    text: "Set your pickup and return details, review your plan, and prepare for a seamless rental experience.",
-  },
-  {
-    number: "04",
-    title: "Drive With Confidence",
-    text: "Enjoy luxury, comfort, and trusted support throughout your Rentex journey.",
-  },
-];
+  const services = [
+    {
+      id: 1,
+      category: 'daily',
+      title: 'Daily Car Rental',
+      description: 'Flexible daily rentals perfect for city exploration, business meetings, or weekend getaways. Choose from economy to premium vehicles.',
+      price: 'From KES 6,300/day',
+      features: ['Free cancellation up to 24h', 'Unlimited mileage', '24/7 roadside assistance', 'Full insurance included'],
+      icon: <Car className="w-6 h-6" />,
+      popular: true,
+      image: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&q=80&w=800',
+      specs: ['4 seats', 'Auto', 'AC', 'Bluetooth']
+    },
+    {
+      id: 2,
+      category: 'longterm',
+      title: 'Monthly Subscriptions',
+      description: 'Long-term vehicle solutions with no long-term commitment. Swap cars monthly, maintenance included, perfect for temporary relocations.',
+      price: 'From KES 125,860/month',
+      features: ['Monthly car swaps', 'Maintenance & servicing included', 'No down payment', 'Flexible return policy'],
+      icon: <Calendar className="w-6 h-6" />,
+      popular: false,
+      image: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=800',
+      specs: ['Flexible terms', 'Full maintenance', 'Insurance included']
+    },
+    {
+      id: 3,
+      category: 'luxury',
+      title: 'Luxury & Exotic Fleet',
+      description: 'Experience premium driving with our curated collection of luxury sedans, sports cars, and SUVs from brands like Mercedes, BMW, and Porsche.',
+      price: 'From KES 27,860/day',
+      features: ['Premium concierge service', 'Doorstep delivery', 'White-glove treatment', 'VIP support line'],
+      icon: <Sparkles className="w-6 h-6" />,
+      popular: true,
+      image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800',
+      specs: ['Premium brands', 'Chauffeur optional', 'VIP experience']
+    },
+    {
+      id: 4,
+      category: 'business',
+      title: 'Corporate Solutions',
+      description: 'Tailored fleet management for businesses of all sizes. From employee transportation to client hospitality vehicles.',
+      price: 'Custom pricing',
+      features: ['Dedicated account manager', 'Centralized billing', 'Fleet analytics dashboard', 'Priority booking'],
+      icon: <Users className="w-6 h-6" />,
+      popular: false,
+      image: 'https://images.unsplash.com/photo-1553729784-e91953dec042?auto=format&fit=crop&q=80&w=800',
+      specs: ['Volume discounts', 'Custom branding', '24/7 support']
+    },
+    {
+      id: 5,
+      category: 'daily',
+      title: 'Airport Transfers',
+      description: 'Seamless airport pickup and drop-off services. Flight tracking included, meet & greet at arrivals, luggage assistance.',
+      price: 'From KES 10,500/trip',
+      features: ['Flight tracking', '60 mins free waiting time', 'Professional chauffeurs', 'Meet & greet service'],
+      icon: <MapPin className="w-6 h-6" />,
+      popular: false,
+      image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&q=80&w=800',
+      specs: ['Flight tracking', 'Luggage assistance', 'Meet & greet']
+    },
+    {
+      id: 6,
+      category: 'business',
+      title: 'Chauffeur Services',
+      description: 'Professional drivers for your important occasions. Discreet, punctual, and knowledgeable about local routes.',
+      price: 'From KES 7,700/hour',
+      features: ['Licensed professional drivers', 'Multi-language support', 'Event coordination', 'Hourly or daily rates'],
+      icon: <Clock className="w-6 h-6" />,
+      popular: false,
+      image: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=800',
+      specs: ['Professional drivers', 'Luxury vehicles', 'Corporate attire']
+    }
+  ];
 
-const stats = [
-  { value: "250+", label: "Premium Vehicles", icon: CarFront },
-  { value: "24/7", label: "Concierge Support", icon: HeadphonesIcon },
-  { value: "98%", label: "Client Satisfaction", icon: BadgeCheck },
-  { value: "1,500+", label: "Successful Bookings", icon: Route },
-];
+  const fleet = [
+    { name: 'Toyota Rav4', type: 'SUV', price: 'KES 7,500/day', image: 'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?auto=format&fit=crop&q=80&w=800', transmission: 'Automatic', fuel: 'Petrol', seats: 5 },
+    { name: 'Mercedes E-Class', type: 'Luxury Sedan', price: 'KES 18,000/day', image: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=800', transmission: 'Auto', fuel: 'Diesel', seats: 5 },
+    { name: 'BMW X5', type: 'Luxury SUV', price: 'KES 25,000/day', image: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&q=80&w=800', transmission: 'Auto', fuel: 'Petrol', seats: 5 },
+    { name: 'Porsche 911', type: 'Sports Car', price: 'KES 45,000/day', image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800', transmission: 'Auto', fuel: 'Petrol', seats: 2 }
+  ];
 
-const pillars = [
-  {
-    icon: Gem,
-    title: "Premium Presentation",
-    text: "Every Rentex experience is designed to feel refined, polished, and truly premium from first impression to final return.",
-  },
-  {
-    icon: Users,
-    title: "Customer-First Service",
-    text: "We build every touchpoint around convenience, trust, responsive support, and a smooth booking journey.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Reliable Quality",
-    text: "From reservations to vehicle delivery, we focus on consistency, comfort, and confidence at every step.",
-  },
-];
+  const additionalFeatures = [
+    {
+      title: 'Comprehensive Insurance',
+      description: 'Full coverage including liability, collision, and theft protection. Drive with complete peace of mind.',
+      icon: <Shield className="w-8 h-8" />,
+      stats: '100% Coverage'
+    },
+    {
+      title: 'Flexible Payment',
+      description: 'Pay with credit card, digital wallets, or corporate accounts. Transparent pricing with no hidden fees.',
+      icon: <CreditCard className="w-8 h-8" />,
+      stats: '0% Interest'
+    },
+    {
+      title: 'Premium Maintenance',
+      description: 'Every vehicle undergoes rigorous inspection and sanitization before each rental. Immaculate condition guaranteed.',
+      icon: <Wrench className="w-8 h-8" />,
+      stats: '200+ Checkpoints'
+    },
+    {
+      title: '24/7 Roadside Assistance',
+      description: 'Round-the-clock support wherever you are. Just a call away for any emergency or assistance.',
+      icon: <Headphones className="w-8 h-8" />,
+      stats: '30min Response'
+    }
+  ];
 
-const testimonials = [
-  {
-    name: "James Cordell",
-    role: "CEO, Cordell Enterprises",
-    content:
-      "Rentex delivered exactly the kind of polished luxury experience we expect at executive level. The booking, delivery, and vehicle quality were exceptional.",
-    rating: 5,
-  },
-  {
-    name: "Victoria Hamilton",
-    role: "Creative Director",
-    content:
-      "The interface is elegant, the service is fast, and the quality of the fleet speaks for itself. This is premium car rental done properly.",
-    rating: 5,
-  },
-  {
-    name: "Alexander Roth",
-    role: "Private Aviation Consultant",
-    content:
-      "From airport delivery to vehicle condition, everything felt refined and dependable. Rentex clearly understands premium clientele.",
-    rating: 5,
-  },
-];
+  const testimonials = [
+    {
+      name: "Sarah Mitchell",
+      role: "Business Consultant",
+      content: "The monthly subscription service transformed how I handle client meetings. Being able to swap vehicles based on the occasion is brilliant.",
+      rating: 5,
+      avatar: "https://randomuser.me/api/portraits/women/44.jpg"
+    },
+    {
+      name: "James Chen",
+      role: "Travel Blogger",
+      content: "Rented a convertible for my coastal road trip. The pickup process was seamless and the car was immaculate. Highly recommend!",
+      rating: 5,
+      avatar: "https://randomuser.me/api/portraits/men/32.jpg"
+    },
+    {
+      name: "Elena Rodriguez",
+      role: "Event Planner",
+      content: "Their corporate fleet solutions handle all our VIP client transportation. The chauffeur service is consistently exceptional.",
+      rating: 5,
+      avatar: "https://randomuser.me/api/portraits/women/68.jpg"
+    },
+    {
+      name: "Michael Omondi",
+      role: "Tech CEO",
+      content: "PurpleDrive's luxury fleet is unmatched. The white-glove service and attention to detail make every ride a premium experience.",
+      rating: 5,
+      avatar: "https://randomuser.me/api/portraits/men/75.jpg"
+    }
+  ];
 
-function Services() {
+  const stats = [
+    { value: '500+', label: 'Vehicles', icon: <Car className="w-6 h-6" /> },
+    { value: '10k+', label: 'Happy Clients', icon: <Users className="w-6 h-6" /> },
+    { value: '98%', label: 'Satisfaction', icon: <ThumbsUp className="w-6 h-6" /> },
+    { value: '24/7', label: 'Support', icon: <Headphones className="w-6 h-6" /> }
+  ];
+
+  const filteredServices = selectedCategory === 'all' 
+    ? services 
+    : services.filter(s => s.category === selectedCategory);
+
+  const handleBookNow = (service) => {
+    setSelectedService(service);
+    setShowBookingModal(true);
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-white text-slate-900">
-      {/* Hero Section - Large Car Image (No Card, No Background) */}
-      <section className="relative overflow-hidden bg-white">
-        <div className="relative z-10 mx-auto max-w-7xl px-6 py-24 sm:px-8 lg:px-12">
-          <div className="grid items-center gap-14 lg:grid-cols-2">
-            {/* Left content */}
-            <div className="max-w-2xl">
-              <motion.div
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="inline-flex items-center gap-2 rounded-full bg-purple-50 px-4 py-2 text-sm font-medium text-purple-700"
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50/30 font-sans text-slate-800">
+      {/* Hero Section – Image Background with Dark Overlay, No Purple Gradient */}
+      <section className="relative h-screen overflow-hidden">
+        <div className="absolute inset-0">
+          <img 
+          src="https://images.unsplash.com/photo-1736426341990-f272d93f7ee7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8bHV4dXJ5JTIwY2FyJTIwc2hvd3Jvb218ZW58MHx8MHx8fDA%3D"
+            alt="Luxury car showroom" 
+            className="w-full h-full object-cover"
+          />
+          {/* Dark overlay for text readability (no purple) */}
+          <div className=""></div>
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/60 to-transparent"></div>
+        </div>
+        
+        <div className="relative h-full flex items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-2xl text-white"
+          >
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2 }}
+              className="inline-flex items-center space-x-2 bg-purple-600 px-4 py-2 rounded-full mb-6 border border-purple-300 shadow-md"
+            >
+              <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+              <span className="text-sm font-medium text-white">Rated 4.9/5 by 2,000+ customers</span>
+            </motion.div>
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="text-5xl md:text-7xl font-bold mb-6 leading-tight"
+            >
+              Drive Your Dreams <br/>
+              <span className="text-white">Without Limits</span>
+            </motion.h1>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="text-xl text-white mb-8 max-w-2xl leading-relaxed"
+            >
+              From daily commutes to luxury experiences, discover our comprehensive range of vehicle solutions designed around your lifestyle and needs.
+            </motion.p>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="flex flex-wrap gap-4"
+            >
+              <motion.button 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-white text-purple-900 px-8 py-4 rounded-full font-bold hover:bg-purple-50 transition-all shadow-xl flex items-center space-x-2 group"
               >
-                <Sparkles className="h-4 w-4" />
-                Premium Mobility Services
-              </motion.div>
-
-              <motion.h1
-                initial={{ opacity: 0, y: 22 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.05 }}
-                className="mt-6 text-4xl font-black leading-tight text-slate-900 sm:text-5xl lg:text-6xl"
-              >
-                Rental Services Built for{" "}
-                <span className="bg-gradient-to-r from-purple-600 to-purple-500 bg-clip-text text-transparent">
-                  Luxury, Motion, and Style
-                </span>
-              </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 22 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="mt-6 text-lg leading-8 text-slate-600"
-              >
-                Rentex delivers premium car rental solutions for city travel,
-                airport transfers, executive transport, and lifestyle mobility —
-                all with refined service, modern booking, and world-class support.
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 22 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.15 }}
-                className="mt-8 flex flex-col gap-4 sm:flex-row"
-              >
-                <Link
-                  to="/cars"
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-purple-600 to-purple-500 px-6 py-4 text-sm font-semibold text-white shadow-[0_16px_40px_rgba(147,51,234,0.28)] transition duration-300 hover:-translate-y-0.5 hover:from-purple-500 hover:to-purple-400"
+                <span>Explore Services</span>
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </motion.button>
+            </motion.div>
+          </motion.div>
+        </div>
+        
+        {/* Stats Bar – still using purple accents for consistency */}
+        <div className="absolute bottom-0 left-0 right-0 bg-black/60 backdrop-blur-md border-t border-white/20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {stats.map((stat, idx) => (
+                <motion.div 
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.1 + 0.6 }}
+                  className="text-center text-white"
                 >
-                  Explore Fleet
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
+                  <div className="flex justify-center mb-2 text-purple-300">{stat.icon}</div>
+                  <div className="text-2xl md:text-3xl font-bold">{stat.value}</div>
+                  <div className="text-sm text-white/80">{stat.label}</div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
-                <Link
-                  to="/BookingPage"
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-6 py-4 text-sm font-semibold text-slate-700 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-purple-200 hover:text-purple-600"
-                >
-                  Book Now
-                </Link>
-              </motion.div>
+      {/* Service Categories Filter */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-10">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-white rounded-2xl shadow-xl p-2 flex flex-wrap justify-center gap-2 border border-purple-100"
+        >
+          {categories.map((cat) => (
+            <button
+              key={cat.id}
+              onClick={() => setSelectedCategory(cat.id)}
+              className={`px-6 py-3 rounded-xl font-medium transition-all flex items-center space-x-2 ${
+                selectedCategory === cat.id
+                  ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg'
+                  : 'text-slate-600 hover:bg-purple-50 hover:text-purple-600'
+              }`}
+            >
+              {cat.icon}
+              <span>{cat.label}</span>
+            </button>
+          ))}
+        </motion.div>
+      </section>
 
-              <div className="mt-10 grid gap-4 sm:grid-cols-3">
-                <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-                  <p className="text-2xl font-black text-slate-900">250+</p>
-                  <p className="mt-1 text-sm text-slate-500">Premium Vehicles</p>
+      {/* Main Services Grid - Removed price and Book Now button */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 bg-gradient-to-r from-purple-900 to-purple-600 bg-clip-text text-transparent">
+            Our Services
+          </h2>
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            Choose from our diverse range of rental solutions, each crafted to provide maximum convenience, flexibility, and value.
+          </p>
+        </motion.div>
+
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          {filteredServices.map((service) => (
+            <motion.div 
+              key={service.id}
+              variants={itemVariants}
+              whileHover={{ y: -8 }}
+              className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-slate-100 hover:border-purple-200 flex flex-col"
+            >
+              <div className="relative h-48 overflow-hidden">
+                <img 
+                  src={service.image} 
+                  alt={service.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                {service.popular && (
+                  <div className="absolute top-4 right-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                    POPULAR
+                  </div>
+                )}
+              </div>
+              
+              <div className="p-8 flex-1">
+                <div className="flex justify-between items-start mb-6">
+                  <div className="bg-gradient-to-br from-purple-100 to-purple-50 p-3 rounded-xl text-purple-600 group-hover:from-purple-600 group-hover:to-pink-600 group-hover:text-white transition-colors">
+                    {service.icon}
+                  </div>
+                  <div className="flex space-x-1">
+                    {service.specs?.map((spec, i) => (
+                      <span key={i} className="text-xs text-slate-400 bg-slate-100 px-2 py-1 rounded-full">
+                        {spec}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-                  <p className="text-2xl font-black text-slate-900">24/7</p>
-                  <p className="mt-1 text-sm text-slate-500">Concierge Support</p>
-                </div>
-                <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-                  <p className="text-2xl font-black text-slate-900">98%</p>
-                  <p className="mt-1 text-sm text-slate-500">Satisfaction Rate</p>
+                
+                <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-purple-700 transition-colors">
+                  {service.title}
+                </h3>
+                <p className="text-slate-600 mb-6 leading-relaxed">
+                  {service.description}
+                </p>
+                
+                <div className="space-y-3">
+                  {service.features.map((feature, idx) => (
+                    <div key={idx} className="flex items-center space-x-3 text-sm text-slate-600">
+                      <CheckCircle2 className="w-5 h-5 text-purple-500 flex-shrink-0" />
+                      <span>{feature}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
-            </div>
-
-            {/* Right side - Large Car Image */}
-            <div className="relative flex justify-center">
-              <motion.img
-                src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80"
-                alt="Mercedes-Benz S-Class"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="w-full max-w-lg rounded-2xl shadow-2xl border border-white/20"
-              />
-            </div>
-          </div>
-        </div>
+              {/* Price and Book Now button removed */}
+            </motion.div>
+          ))}
+        </motion.div>
       </section>
 
-      {/* Stats Section */}
-      <section className="relative -mt-8 z-10 pb-8">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-          <div className="grid gap-4 rounded-[32px] border border-slate-200 bg-white p-6 shadow-[0_20px_50px_rgba(15,23,42,0.08)] sm:grid-cols-2 xl:grid-cols-4">
-            {stats.map((item) => {
-              const Icon = item.icon;
-              return (
-                <div key={item.label} className="rounded-2xl bg-slate-50 p-5">
-                  <div className="mb-3 inline-flex rounded-2xl bg-white p-3 shadow-sm">
-                    <Icon className="h-5 w-5 text-purple-600" />
-                  </div>
-                  <p className="text-3xl font-black text-slate-900">{item.value}</p>
-                  <p className="mt-2 text-sm text-slate-500">{item.label}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Services Grid */}
-      <section className="bg-white py-20 sm:py-24">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full bg-purple-50 px-4 py-2 text-sm font-medium text-purple-700">
-              <Star className="h-4 w-4" />
-              What We Offer
-            </div>
-            <h2 className="mt-5 text-3xl font-bold tracking-tight sm:text-4xl">
-              Premium Services Built Around Your Journey
-            </h2>
-            <p className="mt-4 text-base leading-7 text-slate-600 sm:text-lg">
-              From personal rentals to executive mobility, Rentex provides
-              elevated services tailored for convenience, elegance, and trust.
+      {/* Premium Fleet Showcase - Removed price and Book Now buttons */}
+      <section className="bg-gradient-to-br from-slate-900 to-purple-900 text-white py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-purple-900 to-transparent"></div>
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Our Premium Fleet</h2>
+            <p className="text-purple-200 text-lg max-w-2xl mx-auto">
+              Choose from our carefully curated selection of premium vehicles for every occasion.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {services.map((service, index) => {
-              const Icon = service.icon;
-              return (
-                <motion.div
-                  key={service.title}
-                  initial={{ opacity: 0, y: 26 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.45, delay: index * 0.05 }}
-                  className="group rounded-[28px] border border-slate-200 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
-                >
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-purple-50 text-purple-600 transition group-hover:bg-purple-600 group-hover:text-white">
-                    <Icon className="h-6 w-6" />
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {fleet.map((car, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.1 }}
+                whileHover={{ y: -8 }}
+                className="bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/20 hover:border-purple-400 transition-all"
+              >
+                <div className="h-48 overflow-hidden">
+                  <img src={car.image} alt={car.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2">{car.name}</h3>
+                  <p className="text-purple-200 text-sm mb-3">{car.type}</p>
+                  <div className="flex justify-between items-center text-sm mb-4">
+                    <span className="flex items-center space-x-1"><Gauge className="w-4 h-4" /> {car.transmission}</span>
+                    <span className="flex items-center space-x-1"><Fuel className="w-4 h-4" /> {car.fuel}</span>
+                    <span className="flex items-center space-x-1"><Users className="w-4 h-4" /> {car.seats} seats</span>
                   </div>
-                  <h3 className="mt-6 text-xl font-semibold text-slate-900">
-                    {service.title}
-                  </h3>
-                  <p className="mt-3 leading-7 text-slate-600">
-                    {service.description}
-                  </p>
-                </motion.div>
-              );
-            })}
+                  {/* Removed price and Book Now button */}
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Why Choose Us */}
-      <section className="bg-slate-50 py-20 sm:py-24">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-          <div className="grid gap-12 lg:grid-cols-2">
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-purple-50 px-4 py-2 text-sm font-medium text-purple-700">
-                <CheckCircle2 className="h-4 w-4" />
-                Why Choose Us
-              </div>
-              <h2 className="mt-5 text-3xl font-bold tracking-tight sm:text-4xl">
-                More Than Car Rental — A Refined Service Experience
-              </h2>
-              <p className="mt-5 text-base leading-7 text-slate-600 sm:text-lg">
-                We combine premium vehicles, elegant digital design, and
-                customer-first support to make every Rentex journey smooth and
-                memorable.
-              </p>
-              <div className="mt-8 grid gap-4">
-                {highlights.map((item) => (
-                  <div
-                    key={item}
-                    className="flex items-start gap-3 rounded-2xl bg-white px-4 py-4 shadow-sm"
-                  >
-                    <CheckCircle2 className="mt-0.5 h-5 w-5 text-purple-600" />
-                    <p className="text-slate-700">{item}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-[32px] border border-slate-200 bg-white p-8 shadow-sm">
-              <h3 className="text-2xl font-bold text-slate-900">
-                Signature Service Highlights
-              </h3>
-              <div className="mt-8 space-y-6">
-                <div className="flex gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-purple-50 text-purple-600">
-                    <Clock3 className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-slate-900">
-                      Fast Reservation Flow
-                    </h4>
-                    <p className="mt-1 text-slate-600">
-                      A modern booking experience that makes premium rentals feel
-                      quick, clean, and intuitive.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-purple-50 text-purple-600">
-                    <HeartHandshake className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-slate-900">
-                      Trusted Customer Care
-                    </h4>
-                    <p className="mt-1 text-slate-600">
-                      Thoughtful support before, during, and after booking for a
-                      more confident experience.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-purple-50 text-purple-600">
-                    <CarFront className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-slate-900">
-                      Refined Fleet Quality
-                    </h4>
-                    <p className="mt-1 text-slate-600">
-                      Every vehicle is presented to reflect comfort, reliability,
-                      and strong premium road presence.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Service Pillars */}
-      <section className="bg-white py-20 sm:py-24">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full bg-purple-50 px-4 py-2 text-sm font-medium text-purple-700">
-              <ShieldCheck className="h-4 w-4" />
-              Our Standard
-            </div>
-            <h2 className="mt-5 text-3xl font-bold tracking-tight sm:text-4xl">
-              Why Rentex Feels Premium at Every Step
+      <section className="py-20 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 bg-gradient-to-r from-purple-900 to-purple-600 bg-clip-text text-transparent">
+              The PurpleDrive Advantage
             </h2>
-            <p className="mt-4 text-base leading-7 text-slate-600 sm:text-lg">
-              Our service model is built around quality, trust, and a refined
-              customer experience.
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+              We're not just renting cars—we're delivering peace of mind with every mile.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="mt-14 grid gap-6 md:grid-cols-3">
-            {pillars.map((item) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={item.title}
-                  className="rounded-[28px] border border-slate-200 bg-white p-7 shadow-sm hover:shadow-md transition"
-                >
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-purple-50 text-purple-600">
-                    <Icon className="h-6 w-6" />
-                  </div>
-                  <h3 className="mt-6 text-xl font-semibold text-slate-900">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 leading-7 text-slate-600">{item.text}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="bg-slate-50 py-20 sm:py-24">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full bg-purple-50 px-4 py-2 text-sm font-medium text-purple-700">
-              <CalendarCheck className="h-4 w-4" />
-              How It Works
-            </div>
-            <h2 className="mt-5 text-3xl font-bold tracking-tight sm:text-4xl">
-              A Booking Journey That Feels Effortless
-            </h2>
-            <p className="mt-4 text-base leading-7 text-slate-600 sm:text-lg">
-              Rentex simplifies premium mobility through a process built for
-              speed, elegance, and confidence.
-            </p>
-          </div>
-
-          <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {process.map((item) => (
-              <div
-                key={item.number}
-                className="rounded-[28px] border border-slate-200 bg-white p-7 shadow-sm"
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {additionalFeatures.map((feature, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.1 }}
+                whileHover={{ y: -8 }}
+                className="bg-white p-8 rounded-2xl border border-purple-100 shadow-lg hover:shadow-xl transition-all"
               >
-                <div className="text-sm font-bold tracking-[0.25em] text-purple-600">
-                  {item.number}
+                <div className="bg-gradient-to-br from-purple-100 to-purple-50 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 text-purple-600">
+                  {feature.icon}
                 </div>
-                <h3 className="mt-4 text-xl font-semibold text-slate-900">
-                  {item.title}
-                </h3>
-                <p className="mt-3 leading-7 text-slate-600">{item.text}</p>
-              </div>
+                <h3 className="text-xl font-bold mb-2 text-slate-900">{feature.title}</h3>
+                <p className="text-slate-600 leading-relaxed mb-4">{feature.description}</p>
+                <div className="text-purple-600 font-semibold text-sm">{feature.stats}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Process Steps */}
+      <section className="bg-gradient-to-br from-purple-50 to-indigo-50 py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">How It Works</h2>
+            <p className="text-lg text-slate-600">Get on the road in three simple steps</p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8 relative">
+            {/* Connecting Line */}
+            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-purple-200 via-purple-400 to-purple-200 -translate-y-1/2 z-0"></div>
+            
+            {[
+              { step: '01', title: 'Choose Your Ride', desc: 'Browse our extensive fleet and select the perfect vehicle for your needs', icon: <Car className="w-8 h-8" /> },
+              { step: '02', title: 'Book & Confirm', desc: 'Reserve online or via phone. Instant confirmation with flexible payment options', icon: <CreditCard className="w-8 h-8" /> },
+              { step: '03', title: 'Drive Away', desc: 'Pick up at any location or get doorstep delivery. Enjoy the journey!', icon: <Navigation className="w-8 h-8" /> }
+            ].map((item, idx) => (
+              <motion.div 
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.2 }}
+                className="relative z-10 text-center"
+              >
+                <div className="bg-white w-24 h-24 rounded-full border-4 border-purple-200 flex items-center justify-center mx-auto mb-6 shadow-xl relative">
+                  <div className="bg-gradient-to-br from-purple-600 to-pink-600 w-16 h-16 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                    {item.icon}
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">{item.title}</h3>
+                <p className="text-slate-600 max-w-xs mx-auto">{item.desc}</p>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Testimonials */}
-      <section className="bg-white py-20 sm:py-24">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full bg-purple-50 px-4 py-2 text-sm font-medium text-purple-700">
-              <Star className="h-4 w-4" />
-              Client Feedback
-            </div>
-            <h2 className="mt-5 text-3xl font-bold tracking-tight sm:text-4xl">
-              Trusted by Premium Clients
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-white to-pink-50"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 bg-gradient-to-r from-purple-900 to-purple-600 bg-clip-text text-transparent">
+              What Our Clients Say
             </h2>
-            <p className="mt-4 text-base leading-7 text-slate-600 sm:text-lg">
-              Don't take our word for it — hear from those who've experienced Rentex.
-            </p>
-          </div>
+            <p className="text-lg text-slate-600">Trusted by thousands of satisfied drivers</p>
+          </motion.div>
 
-          <div className="mt-14 grid gap-6 md:grid-cols-3">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {testimonials.map((testimonial, idx) => (
-              <div
+              <motion.div
                 key={idx}
-                className="rounded-[28px] border border-slate-200 bg-white p-7 shadow-sm hover:shadow-md transition"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.1 }}
+                whileHover={{ y: -8 }}
+                className="bg-white p-8 rounded-2xl shadow-lg border border-purple-100 hover:shadow-xl transition-all"
               >
-                <div className="flex items-center gap-1 mb-4">
+                <div className="flex space-x-1 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
                   ))}
                 </div>
-                <p className="text-slate-600 italic">“{testimonial.content}”</p>
-                <div className="mt-6">
-                  <p className="font-semibold text-slate-900">{testimonial.name}</p>
-                  <p className="text-sm text-slate-500">{testimonial.role}</p>
+                <p className="text-slate-700 mb-6 italic leading-relaxed">"{testimonial.content}"</p>
+                <div className="flex items-center space-x-4">
+                  <img src={testimonial.avatar} alt={testimonial.name} className="w-12 h-12 rounded-full object-cover" />
+                  <div>
+                    <h4 className="font-bold text-slate-900">{testimonial.name}</h4>
+                    <p className="text-sm text-slate-500">{testimonial.role}</p>
+                  </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="pb-20 pt-4 sm:pb-24">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-          <div className="relative overflow-hidden rounded-[36px] bg-gradient-to-r from-purple-700 to-purple-800 px-8 py-14 shadow-[0_24px_70px_rgba(147,51,234,0.22)] sm:px-12 sm:py-16">
-            <div className="absolute -left-10 top-0 h-52 w-52 rounded-full bg-purple-500/20 blur-3xl" />
-            <div className="absolute right-0 top-10 h-56 w-56 rounded-full bg-purple-400/10 blur-3xl" />
-
-            <div className="relative z-10 mx-auto max-w-4xl text-center">
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-purple-300 backdrop-blur">
-                <Sparkles className="h-4 w-4" />
-                Premium Travel Starts Here
-              </div>
-
-              <h2 className="mt-6 text-3xl font-bold tracking-tight text-white sm:text-5xl">
-                Ready to experience the Rentex difference?
-              </h2>
-
-              <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-purple-100 sm:text-lg">
-                Explore our fleet, reserve your ideal vehicle, and enjoy a
-                rental experience built around comfort, trust, and premium
-                service.
-              </p>
-
-              <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                <Link
-                  to="/cars"
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-white px-6 py-3.5 text-sm font-semibold text-purple-700 transition duration-300 hover:-translate-y-0.5 hover:bg-slate-100"
-                >
-                  Browse Cars
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/30 bg-white/10 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:bg-white/20"
-                >
-                  Contact Us
-                </Link>
-              </div>
+      {/* CTA Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          className="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-3xl p-12 md:p-16 text-center text-white relative overflow-hidden shadow-2xl"
+        >
+          <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-purple-400 opacity-20 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+          
+          <div className="relative z-10 max-w-3xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Hit the Road?</h2>
+            <p className="text-xl text-purple-100 mb-8">
+              Join thousands of satisfied customers. Book your perfect vehicle today and experience the PurpleDrive difference.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <motion.button 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-white text-purple-600 px-8 py-4 rounded-full font-bold hover:bg-purple-50 transition-all shadow-lg"
+              >
+                Browse Fleet
+              </motion.button>
+              <motion.button 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-purple-800 text-white border border-purple-400 px-8 py-4 rounded-full font-bold hover:bg-purple-700 transition-all flex items-center justify-center space-x-2"
+              >
+                <Phone className="w-5 h-5" />
+                <span>+254 700 123 456</span>
+              </motion.button>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
-      {/* FOOTER */}
+      {/* New RENTEX Footer */}
       <footer id="contact" className="border-t border-slate-200 bg-slate-50">
         <div className="mx-auto max-w-7xl px-6 py-20">
           <div className="grid gap-12 lg:grid-cols-4">
@@ -564,75 +653,50 @@ function Services() {
                 </div>
               </div>
               <p className="mt-6 leading-7 text-slate-600">
-                A modern luxury car rental platform built for premium experiences, elegant service,
-                and exceptional delivery.
+                A modern luxury car rental platform built for premium experiences, elegant service, and exceptional delivery.
               </p>
               <div className="mt-6 flex gap-3">
                 {[Facebook, Twitter, Instagram, Linkedin].map((Icon, index) => (
-                  <a
-                    key={index}
-                    href="#"
-                    className="rounded-xl bg-white p-3 text-slate-600 shadow-sm transition hover:bg-gradient-to-r hover:from-purple-600 hover:to-purple-700 hover:text-white"
-                  >
+                  <a key={index} href="#" className="rounded-xl bg-white p-3 text-slate-600 shadow-sm transition hover:bg-gradient-to-r hover:from-purple-600 hover:to-purple-700 hover:text-white">
                     <Icon className="h-5 w-5" />
                   </a>
                 ))}
               </div>
             </div>
-
             <div>
               <h5 className="text-sm font-bold uppercase tracking-[0.2em] text-slate-900">Fleet</h5>
               <ul className="mt-6 space-y-4 text-slate-600">
-                {["Luxury Sedans", "Sports Cars", "Executive SUVs", "Electric", "Event Fleet"].map(
-                  (item) => (
-                    <li key={item}>
-                      <a href="#" className="transition hover:text-purple-700">
-                        {item}
-                      </a>
-                    </li>
-                  )
-                )}
-              </ul>
-            </div>
-
-            <div>
-              <h5 className="text-sm font-bold uppercase tracking-[0.2em] text-slate-900">Services</h5>
-              <ul className="mt-6 space-y-4 text-slate-600">
-                {[
-                  "Airport Transfers",
-                  "Wedding Rentals",
-                  "Corporate Bookings",
-                  "Long-Term Hire",
-                  "VIP Concierge",
-                ].map((item) => (
-                  <li key={item}>
-                    <a href="#" className="transition hover:text-purple-700">
-                      {item}
-                    </a>
-                  </li>
+                {["Luxury Sedans", "Sports Cars", "Executive SUVs", "Electric", "Event Fleet"].map((item) => (
+                  <li key={item}><a href="#" className="transition hover:text-purple-700">{item}</a></li>
                 ))}
               </ul>
             </div>
-
+            <div>
+              <h5 className="text-sm font-bold uppercase tracking-[0.2em] text-slate-900">Services</h5>
+              <ul className="mt-6 space-y-4 text-slate-600">
+                {["Airport Transfers", "Wedding Rentals", "Corporate Bookings", "Long-Term Hire", "VIP Concierge"].map((item) => (
+                  <li key={item}><a href="#" className="transition hover:text-purple-700">{item}</a></li>
+                ))}
+              </ul>
+            </div>
             <div>
               <h5 className="text-sm font-bold uppercase tracking-[0.2em] text-slate-900">Contact</h5>
               <div className="mt-6 space-y-5">
                 <div className="flex items-start gap-3 text-slate-600">
                   <Phone className="mt-0.5 h-5 w-5 text-purple-700" />
-                  <span>+971 4 123 4567</span>
+                  <span>+254 712 345 678</span>
                 </div>
                 <div className="flex items-start gap-3 text-slate-600">
                   <Mail className="mt-0.5 h-5 w-5 text-purple-700" />
-                  <span>concierge@rentex.com</span>
+                  <span>concierge@rentex.co.ke</span>
                 </div>
                 <div className="flex items-start gap-3 text-slate-600">
                   <MapPin className="mt-0.5 h-5 w-5 text-purple-700" />
-                  <span>Dubai, United Arab Emirates</span>
+                  <span>Nairobi, Kenya</span>
                 </div>
               </div>
             </div>
           </div>
-
           <div className="mt-16 flex flex-col gap-4 border-t border-slate-200 pt-8 text-sm text-slate-500 lg:flex-row lg:items-center lg:justify-between">
             <p>© {new Date().getFullYear()} Rentex. All rights reserved.</p>
             <div className="flex gap-6">
@@ -643,8 +707,61 @@ function Services() {
           </div>
         </div>
       </footer>
+
+      {/* Booking Modal */}
+      <AnimatePresence>
+        {showBookingModal && selectedService && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            onClick={() => setShowBookingModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-2xl font-bold text-slate-900">Book {selectedService.title}</h3>
+                <button onClick={() => setShowBookingModal(false)} className="text-slate-400 hover:text-slate-600">
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
+                  <input type="text" className="w-full border border-slate-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Email</label>
+                  <input type="email" className="w-full border border-slate-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Phone</label>
+                  <input type="tel" className="w-full border border-slate-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Pickup Date</label>
+                  <input type="date" className="w-full border border-slate-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
+                </div>
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-xl font-bold mt-4"
+                >
+                  Confirm Booking
+                </motion.button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
-}
+};
 
-export default Services;
+export default CarRentalServices;

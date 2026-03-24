@@ -25,6 +25,8 @@ function Signup() {
   useEffect(() => {
     if (location.state?.email) {
       setFormData(prev => ({ ...prev, email: location.state.email }));
+      // Clear state so email doesn't persist on refresh
+      window.history.replaceState({}, document.title);
     }
   }, [location.state]);
 
@@ -206,6 +208,7 @@ function Signup() {
                       placeholder=""
                       value={formData.firstName}
                       onChange={handleChange}
+                      autoComplete="given-name"
                       className="w-full bg-transparent outline-none text-slate-700 placeholder:text-slate-400"
                     />
                   </div>
@@ -222,6 +225,7 @@ function Signup() {
                       placeholder=""
                       value={formData.lastName}
                       onChange={handleChange}
+                      autoComplete="family-name"
                       className="w-full bg-transparent outline-none text-slate-700 placeholder:text-slate-400"
                     />
                   </div>
@@ -242,6 +246,7 @@ function Signup() {
                     value={formData.email}
                     onChange={handleChange}
                     required
+                    autoComplete="off"  // Prevent auto-fill for email
                     className="w-full bg-transparent outline-none text-slate-700 placeholder:text-slate-400"
                   />
                 </div>
@@ -260,6 +265,7 @@ function Signup() {
                     placeholder=""
                     value={formData.phone}
                     onChange={handleChange}
+                    autoComplete="tel"
                     className="w-full bg-transparent outline-none text-slate-700 placeholder:text-slate-400"
                   />
                 </div>
@@ -279,6 +285,7 @@ function Signup() {
                     value={formData.password}
                     onChange={handleChange}
                     required
+                    autoComplete="new-password"
                     className="w-full bg-transparent outline-none text-slate-700 placeholder:text-slate-400"
                   />
                 </div>
@@ -298,6 +305,7 @@ function Signup() {
                     value={formData.confirmPassword}
                     onChange={handleChange}
                     required
+                    autoComplete="new-password"
                     className="w-full bg-transparent outline-none text-slate-700 placeholder:text-slate-400"
                   />
                 </div>

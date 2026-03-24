@@ -117,42 +117,46 @@ const team = [
     name: "Daniel Kareem",
     role: "Founder & CEO",
     bio: "Leads Rentex with a vision to modernize premium car rental through product excellence and elevated customer service.",
+    image: "https://media.istockphoto.com/id/1435220822/photo/african-american-software-developer.webp?a=1&b=1&s=612x612&w=0&k=20&c=XETUT5mBrRDzRjXu_D86Q6AVXiqeDI4qTQxgGL_uN8U=",
   },
   {
     name: "Sophia Grant",
     role: "Head of Operations",
     bio: "Oversees service quality, logistics, and city-wide coordination to ensure every rental experience feels effortless.",
+    image: "https://images.unsplash.com/photo-1632255658480-3546119b5ec2?q=80&w=687&auto=format&fit=crop",
   },
   {
     name: "Amir Hassan",
     role: "Customer Experience Lead",
     bio: "Designs high-touch support journeys focused on business travelers, VIP clients, and event-based rentals.",
+    image: "https://plus.unsplash.com/premium_photo-1733306644309-90a33768d232?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmVzaW9uYWwlMjBhZnJpY2FuJTIwd29tYW58ZW58MHx8MHx8fDA%3D",
   },
   {
     name: "Elena Brooks",
     role: "Fleet Director",
     bio: "Curates and manages the Rentex fleet with a focus on luxury, safety, performance, and presentation.",
+    image: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=900&q=80",
   },
 ];
 
 const testimonials = [
   {
-    name: "Michael Reed",
-    role: "Investment Executive",
+    name: "Kevin Mwangi",
+    role: "Investment Analyst, Nairobi",
     quote:
-      "Rentex delivers the kind of premium experience that busy professionals actually need. Clean process, exceptional vehicles, and service that feels genuinely high-end.",
+      "Rentex delivers the kind of premium experience that busy professionals actually need. Clean process, exceptional vehicles, and service that feels genuinely high-end. I've used them for client meetings in Westlands and airport pickups—always flawless.",
   },
   {
-    name: "Amina Noor",
-    role: "Event Client",
+    name: "Wanjiku Mwaura",
+    role: "Event Planner, Karen",
     quote:
-      "From booking to delivery, everything felt polished and intentional. The vehicle quality and attention to detail exceeded expectations.",
+      "From booking to delivery, everything felt polished and intentional. The vehicle quality and attention to detail exceeded expectations. I've recommended Rentex to several of my wedding clients, and they've all been impressed.",
   },
   {
-    name: "James Otieno",
-    role: "Business Traveler",
+    name: "Dr. James Omondi",
+    role: "Business Consultant, Upper Hill",
     quote:
-      "I needed an executive vehicle with airport delivery and zero friction. Rentex made the entire experience smooth, fast, and professional.",
+      "I needed an executive vehicle with airport delivery and zero friction. Rentex made the entire experience smooth, fast, and professional. Their local knowledge of Nairobi traffic and preferred routes really helped me stay on schedule.",
   },
 ];
 
@@ -340,7 +344,7 @@ function AboutPage() {
             <div className="relative overflow-hidden rounded-[32px] border border-white/70 bg-white p-3 shadow-[0_30px_80px_rgba(15,23,42,0.12)]">
               <div className="overflow-hidden rounded-[26px]">
                 <img
-                  src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISEhUSExMWFRUVFRUVFRcWFxcVFxUVFhUXFhUWFRUYHSggGBolGxUWITEhJSkrLi4uFx8zODMsNygtLisBCgoKDg0OGBAQGy0gICUtLS0tKy4tLSstLy0tLS0vLTAvKy0tLS0tKy8tLSstLSstKystLSsvLS0tLS0tKy0tLf/AABEIALcBEwMBIgACEQEDEQH/xAAcAAACAwEBAQEAAAAAAAAAAAABAgADBgUHBAj/xABEEAABAwEFBAcGBAUCBAcAAAABAAIRAwQSITFRBUFhkQYTInGBofAUUrHB0eEHMkLxQ2JykqIVslOCg8IWIyQzNHOT/8QAGgEBAQADAQEAAAAAAAAAAAAAAAECAwQFBv/EADERAAIBAgQEBAUDBQAAAAAAAAABAgMRBBITYSExQVEFgZHwFCJxobEyUuEjQlPB0f/aAAwDAQACEQMRAD8A32aICgARhaLmywQEwagEWlLgsaOKZJeRvqFHBUlLfQlAN4qJQUZVA4CcFV30RUQFoKaVT1iYPUBbKkqk1FDUSwLpQlU30C9LAuvBAvCplSVbAuvhLfCqUhLAtvhG8NVTCiWBdeUJVQKYFQDIpZUlBYMoShKkoQhQlAlBAFBBCUAZUSqKg+UOTBypBTByAuBTAqkOTByhS1GFVKMqgtCIKqBTgBQqRa540SFyAIREIiviSUQUEwVuSwQjCCcFS5koiwpCaVMEuRxFURJCiEsRM1BqJdCMyS6jyAgEoKsDgsHwM1xCKYVLmqzrUjzKK/USSa4Cwoo4IQszXYkqSllCUINKkpZQlCDShKWUCVQMSlJSkoEoQaVEkqID5AUwKqBTgqkuPKaVWCjKFLAUwKrlEFAWApgVUCmBULcslEFJKkoLloKN5VSjKWLcsBRlVykpWhrnuZPaaAT3H0Oa11KkKavN2MoRlJ2R9AKkpHYISs4tNXRhJ2dmWSiHKuUZVFx7ykpJUlLFuPeUlVVakCdPhv8AKU5wU4XsOI15S8klCVbDMWFyl9VSpKWGYYlC8lJSyrYlx7yF5JKEoQclBLKEoS4yEpSUpKC495RVyogufOCiCkCYIQsBRlVymBQo4KKQJghRgmBSIoCwFFICiCgHUSooCVagaJKz1rqvp1BXbiQZcNW7xy+C6Fsr3nQMh5lUFsiF8x4jjNSrlj+mP3fvke1g8Pkhd82dd9YFrarTLYk/0Hf4Z90q1cnYda440TkcWacR3LoUhdJZp+Xi05csvAHevS8MxKnHI/I8/G0cssyLUVCEF6pxxYZUQXB6Z7cNksznsANVwIpzkDIBeRvi8MO5DI5/TDpiyznqacPqhzDU91jQQ4td/O5uEbpnSdLsy1CpSa4GYwnUQCw+LS3zX58s7yXOLiSXS5xOJLpJJJ3nMr1b8Odp3qIYTi09WfCXUj3QXt8AtVWOWUZ+T8+X3MoO6cfM28oSgotpiGUJQUlASUJUSkoAygSgSllCBlSUsoShBiUpKEoEoAyoklRAVApgVwxWeRIJ8wpTrVDvWGpEz02d2UQVjrZVtnWG5JaMsgMuJX27LrVj2aoIwm9MyU1EMjNMCmBXIIPvkJIfODwQmojLTZ2wiuQGv97HxQcH+98U1ENNnZlEFcVt6R292OG9WAO95NRDTZ2JVdoqFokCYz1u744rlC/7wVjadQjCT3SfksKklOLjxVzKMXFpltppgQ4ZHEKpqus9NzRcqAhrj2Sf0uzjx+qpc2DBXx9ek6U3FnvUpqcbi16ZIBH5m4hdSlW62mHgdpuYH+TfHMcQFz2lPZKvVVJ/Q/A8DuKuHrOlNSRhXpKcWjqUqgORmcR3IuXx1rG/rCGHB0uAO4/qHMz4nRXCyVYxHmF9fTrxnFSR8/Km4uxZfGqx34lWa/SpOnAOfTcfdFVsBx7i0Lu1bFVb70a4rjbT2Q2pSqsDyS9pzJILhi3PiAq6ifA2ab5nkFmd2hIgzDhoQYcPitR0HtZZaDSmOsF0HSo03qZ/uEf8yzltpG+agGD+0RvvDB5jicfFW065bUbUaYILXg6HBwPNb5Rzwa93NCeWVz3uzWtr2NdleAMaHeDxBw8Fb1g1CyuzrT1klpuhwbVaOFQS4eDw6e9feGauWhVeHI3ZGdo1BqEDVbqFwbRTN03HGeP7L4qNlqtN41AR4/FHV2Lps1PXN1CU1m6rjEsuzew1n5oNY3MOdG6Mk1RpnYNduqBrt1XFqFkxfIOiR7mgHtFXVQ0jtG0t1Q9obqs51IfBMyMsRhyVrpAOfMKaqJpnd9palNobqsfbLS9rrsHtDDfOOOIXSot7OJgxjjkmqiKB3faW6qLNVKgBIvH14oJrIumdN1naQQRgeJTU6DW5NATByYOWo3kATDuQvL6aD6Wpcd4GEHTVYynGKvJlSb5Hz3BorG0iRlgvqFpA/Kxo78SldaSdw5Bcs8ZTjy4mapSZU8BrS5xEAEwAXGAJwa0GTwWaG3q1f/4lie5uMVbQRQZwIYJc4eIWn6zgOSN/guZ499F+Tb8Oc/ZNltAaTaX0y4nAUmXWNEZdqSe8lc/a/TGwWbB1QVHj9FMCo6RuMdkHvIXVt1hp1hFQFw928bp72zB8V8J6M2M50GGMuw0x5YLVHEfNmm2/o7e/QylT+Wy/BitqfinXmKFFlIbr4vvdp2WwG+aqp9N9oub23sE7w0gjwBWrtnQmxVHXouuGUOIPImPJcnaXQwYijXDqgjsP0OrhlhO45L0qWKwc+Ek19eP3uzklRxC4x+xnLZ0vtrYPXEwQbsCDBmDvXqOwdsst1nbXZ+YCKjd4Izn1ociF4btR0EtwJa4twxEtJEg7xIK7nQ7bLrDVbUxNJ4HWN3FuV+NW7+GOYV8QwVOpD+mkn0t1LhMROMvmd0exAougiCgXNIDmGWuEtPBAL5Rqzse3e6PustbrKZYTD2ZH/a75Hx1WY2n0rNG10rPN1rmlzn1XYOcCQ6kDkCI8ZHj2HN/UMxpovN+lnROpZ2GqK95tSpda17Qey5hIkmQfyxMZRvC9zwrFcdNv6e+h5mNw/wDfbh1PThXq1BULLglkUTi7t3T2n8JIw4cV57bNr7RkjrwHAwQ6nTEOGYlrVPw+6QtptdZq9Q033h1Zd+SCIADjx4+O5afbdjpgmrVaGtgTUwjIDtEjDx5le260HLTfB78n9O55mnKKzrituh5jtJrrw6+mLwN4PpuLTiZOGIgkZABIQx5lrxlEPFw4aHFvMhbV9n2e8hzqlJ2l6oQBw7JyX22Kvs1hwqWZpnO6HH+4j5roSaRpc+PIzmzOkHsrKfWS2457QSCWmm9pd+YYGHjMe8E9LpW60Oe59a5TBDWNYcXmSMLvacThgtobXYXtqxaqb3vbca681/UwOzcY3LtG8ZxOAJgADgbG2lSpPPWsp1ajZAr0LOZOE5tYCR3DdktWRx42v77G2M1LhexorA97g0kubgOy4Qct/FV25xB/MP6SYEa8V9GzLd7TeFIOJaQHS25dvTE34xgTGY3icF9B2I4Y3C4nMyCfHeVytHUmjih7KvYwIBkifODmF99KldwBIGmEBWmytBxYARlqEYUUSs+S3WeY7RB4R5mF8VofTaRePDOfJffaabndmY13L5Kexqe/HvVYsPQa04tP24J3URhJlW0rG1n5RHNO5iZe5GfO6iyVZ1bBnv1UfSlK2kd8FTKC32ZmgUUCithwLLqIYhKgKyA11U1XgGCPHIhXLjWraIcH1CZNO+HcerkH4Lhx7emrLqb6Fsxmul/Tesyq6z2W6CwQ+oReIdvDQcBG8mce5ZpvSm3Az7W+e5kciFxKtYkXiZc8l7jqXGfn5qgxv4/P7L06eFpQillT97nDOtOTvdnpPR78QXXgy1BpacBVaLsf/Y3cOIy03r0FtYHLFeA0afZJE4YRnu7XgvRvw+20alM2d57dKLpObqZy/ty5LyvEcIoR1aS5c1/s7cJXcnkn5M1m3faDQf7MQKwEskB0xm0ThJGRO+F5PYtu2qvUIrV6pIP5ZujPEFjYGfBeutqFYLp5sC4/26i3fNdo0yNUD/dz1XLgMRBt05JXfJ79vM34iElaa5LmjrbJpZG8ZXS2pT6qhXrsBNUUSL38oDiORc7ms5sK3yBitdZ4qU3sP62ObzHrmuaacKyzdzpTzQ4Hh9WRHj8TKtbajAa7Fovd4DxDvqptCmQSDm1xkd+J873JUkZHVfX2UkfO3aN/+GPSUj/0Nc8aLicP6Z0jLh/SvRV+fGNP6SQ5pvsIzDm4kDlPeAvTtk9P6BsoqV3RWb2XMaJc8gYFg0OpgcV8/wCJ4CTnqU1e/NLv3PWwWKWXLN8jctK4/SmyNtNJlnLyCys2pDCLwbcqNgyDhLtPgvNtt/iBaKwLaf8A5TDhdBN8jVzx8BHiur+GVsqvdVL6jjTpMYGtJwaXkknXAMPNc68PrYem67dmuhteLpVZaaV7mob0csFmYalZrAN7q7i4TpDjHgAlpfiJs5nYbUddGAuUnhoA3ARl4LzDpHtZ9truqvcTTa4tpNmAGgxManAk64blzmy78rcAYwwA9SvUp+HZ4qVacm/ryOCeKUXaEVY/QWyNvWa1iaNVlSMSP1N/qY4Xm+IXVaR7reQX5soVatF4qsJY5plr2HEHfxjPwzXs/QXpR7bSIfArU4FQDJwP5Xt4GDhuI7lw4zB1cOs9OTcfwdFCvCr8slZmrq2ei8Q+lTcP5mNPyS2A2RvZpikI3NuSD3ZoB3cltNnbUbde2R8OIWihjpJ2qPh6/b+TbUoK3yo6987jKW+N4WbtdNtnotuCsCwmXU2l8tJwvsBvOjLstOHdK+rZlvqucGVBeaWlwqZZECCIEHgV6rmnT1IyTXvoca4Syyi0zsVKLXiDB78/ArmWvZZH5OR+R3r7iNE7Kp34haY4uPU2uk+hm3tIwIg75kJL3ctFXs7arTE3hqI/dq4b7PccZgH5LqU83I12PmAdJyjcFHdy+mTwSkngs7ksfODqhK+i8eCV8n19kuSxTeUVgHqVEuLHGbtpmjuQ+qI203R3l9VneuQ9pXXpROXVkaQbYbo7y+qzdvtLaVSo8z1Nab8ibjiInDccuSU2tVVbUCC1wBBEEHIjRYzw8JRcX1Kq0k0zCVmiAZ0GA3RmjSugCQXEgjMYHcujtqyNB7Ahp8YOkrkCQMvWIw9b1uNZ9mzqwbfBJAIwIyw7u85q3Ze03WauyqMbsXhq2YcORPjC+QNgfHnvVJIJMmNMFg6cZXT68zJSatboe6U7W0hrgZDgHAiSCCJBnxVzKwO8Ec1570a6W0aNBlKqXlzJEhoi7JujOcBAyXYb01snvuHe0r5Kr4fWhJqMG+PP2j3YYqnJJuSWw9boyadQus5FwmerJi4d4Yci3gcvhoNl2d4zwXBb0wsh/i/4v+QVjeldlP8AF5tePi1SpTxU0s8H9bMsKtKP6ZL1RmeneyhRrl+TKhLgdHT2wfHHxWYbSEQCPA/uvT//ABJZz/Fb4z81XU2nY3/mNB39Qpn4r1KHiFWnBQnTbt19o4quFhOTlGS4nmzKJBBG4g65eAVAsHf5D5r0siwnKnZvBtMfBVVNn2J38Jn/AC1Kjf8Aa9dK8Uh1jJeX8mp4GfRo85fZD+nDmeWC13Rgmls+2vntQ4A/9OB5uX2VdhWQ7qjf6akx4OaVZatmtpWK0U6LnP6wFwLiCcAJAugbmrXiMZTrQUFdXa5/VGVLDVKcnJ9n+DDUqEmmzcSByzjjmr9oU3MqupskyRdlpaSDBb2XYjHBUUbTgxwzYZkGDE/Ebl0tuVw803tdmyIL3PdDHYOdJwJnAcAvSk2qi7O/qciScH3Oaxzw667Ug7szjJ78/FaLoDaup2gxoILaofTO8QW3x/kwcys5TomZOYnQmQJPrgvv2DXJttncP+PTAymLwBy7ypiFelNbP8EpO04vdHuwq+v3VgI/bBfEKwS2229XSfUDHVC1pIYwS5x3AAL4e8py3Z9FZJA27t2nY6fWVHneGMEFz3aNnzJwC4vRzp1VtLyzqACBe7JLxEgYwBGfkvObRaqlutJ66oKZJhxcHRSaP0tYMcPd3mZOZW3pbYpWSiLPs2z1LRVfnUdTe1l736j3Bt7uEAahe1LARpUsr4zfW9kvPkcEcQ5zzcor1ZqdpdKW2ZnWVw1gyEmC46NbmVyR+KFiOo4do/8AauMOiwDH2vatoL3RLoe5rGDc1t2C47gBhJwBzOVq7ds4JFGw07oJDTWe+oSN14AwDwk95TDYaFRNRcpW5tWUfJvixVrOLu0ls73+x6hZuntJ0GnTcZmJkCBmTLcsRzXz2jpIXkksz/mwHAYLDbG6Q1CblJ1CzGD/AOzZyTiCDHaJBjfC6lG0XgDBHBwLTyXqYbDKmmmvvf8A4cdas5Wafv7nf/10e5/l9lBt0f8AD/y+y4RcVLy68kTRqSO5/rv8n+X2SO24fc/y+y415SVckSaku52P9aPuf5fZRce96xRTJHsM8j5upSmgvpCIWdzE+I2ZVPsAOq6YhG6FLixwquyA7CSvkd0a0eR4StPAQgaJcWMq7owT/EPgPjilHRP+c8lrg3gmawKXZbGOPRT+fySHom73/Ira3ApcBS7FjDu6Jv8AeCR3RSp7zVvOrHFS4EzMWMAejFYZEcylPRyvuPmvQerGiIpjRXMxY87OwLSNeaQ7GtI3HmF6N1I09egp1QTMLHnH+nWofpdyCspG20wbpe0HOB9l6IaASmgsXZ80VXXJnmDbNVaSSx2OeCDnRvLOB14SvUPZxp6zSmgFlmJY8wNS9m6eG7x1VtntNSlUZUp/mYZaSJAOWRXpPszdPIKCyt0Cjd1ZoLhxMiOmm0Peb/8Am36Jx032h7zf7GrU+yM90cgoLIz3Ry+y5/hMP/jj6I261X9z9TMjpztHdUaP+nTPxai7pntN38bkxg/7VpzZWe6OOAQ9nb7vwT4Wh+yPohrVP3P1MbbbXa7TArPfUAMgOxAOoGQKWhsypndH9oW16kaKdWNPkt0YqKslY1tt8WcKy0qowmB3ALo0w7evr6v1KICyIUCUwlWAIwEBWESmITKkKo4KJ47uaiXBUCUzZVN9NfQpeCfX7pwT68foqA9WNKgLFEEC5Ckk+sUWzx5KsuTNd6wQFrZ0TYpA5MHevqgDj6CIB9YevulLipfQDY/NDH1ikL0vWIC7H0EwJ9Y/uqBUKsY8+sEA5J9BCT6H1zRvcVA7ioBS46fBQuOnl9k7ncfLh4qF3FAVydPIfRAuKe/6xUNT1j6hAV3jojeOh5JgUQ7jju+/kgBid3kg4lGUOs459/igBjp5IHuUNX1l5JTW9c1QRzj6H2S3jp65IOqqdZ6j7oAlx08h9Epco5yQvQg5eUC8qq+h1itgXX/UfZRUXuPkogHARDeC1TKfBT2Ye6OQXPr7G/R3Mv6zTNPrDwWqbZW7mgdwCsuRuJ71NfYaO5lQx2hUOunw+S1bWnf9E4YMvoU19i6O5kA37+u9EBa7qe4+CYNGg9eCfEbDQ3Mi0fVMCtYQNfXgmACmvsXQ3Mm31EfDJK4evutcW+CETmJ8cE19ho7mQj168EeqOcLY3RpCLWmeCfEbDQ3Me2g4/pPIn4Itou90/wBpWwc0IXBuwT4jYugu5lOocNx5IFpHDvB4RuWsAPehimvsTR3MtdOeP3RNB2dx3Kd+oWpu8fXcgW6x8FNd9horuZQ0iNx8QRHNJdnctbHA81Bhqrr7DRXcycYTHrRSPL1r3rYZqo2cTkOQTX2GjuZPz0/bd4oOGo7v2wWsDADl5J8E19ho7mNLcz9Urm+ohbE0+Hj90rW7o5z81fiNho7mO9eSG9bF9NuUDmqjYWH9I5D6J8QuxNDcycIEb49fJaz2cev2QNnZ7o5D6K6+xNHcyJCAWt6lug5D6IsY0ZNA7gPkE19ho7mUFJ/unkfoitXyUU132LoruMXEZItneootBuHAOqMKKKAIB4Jy1RRUCnDerGlRRLEAWyiykoooUctUa1RRQpHkJaaCioHcluqKIQdpRNNRRCgAhJE6hBRCD5ItCCiADnJQVFEsBkS3googK7uibEaqKILinnyRLfWCiiAreDkk6qM1FFQCErgiogFuKKKKEuf/2Q=="
+                src="https://images.unsplash.com/photo-1770884570311-48029bcbd394?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGx1eHVyeSUyMGNhciUyMGxhbWJvcmdoaW4lMjB5ZWxsb3d8ZW58MHx8MHx8fDA%3D"
                   alt="Luxury car experience"
                   className="h-[520px] w-full object-cover transition duration-700 hover:scale-105"
                 />
@@ -611,15 +615,7 @@ function AboutPage() {
               >
                 <div className="relative h-72 overflow-hidden bg-slate-100">
                   <img
-                    src={`https://images.unsplash.com/photo-${
-                      index === 0
-                        ? "1560250097-0b93528c311a"
-                        : index === 1
-                        ? "1494790108377-be9c29b29330"
-                        : index === 2
-                        ? "1573496359142-b8d87734a5a2"
-                        : "1500648767791-00dcc994a43e"
-                    }?auto=format&fit=crop&w=900&q=80`}
+                    src={member.image}
                     alt={member.name}
                     className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                   />

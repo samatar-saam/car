@@ -1,3 +1,4 @@
+// AdminLogin.jsx
 import { useState, useEffect } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
@@ -14,7 +15,7 @@ import {
   Users,
   Activity,
 } from "lucide-react";
-import Navbar from "../../components/Navbar"; // Import the Navbar
+import Navbar from "../../components/Navbar";
 
 const ADMINS_API = "http://localhost:3001/admins";
 
@@ -30,13 +31,14 @@ function AdminLogin() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
 
-  // Prefill email if passed via location state (e.g., from registration)
   useEffect(() => {
     if (location.state?.message) {
       toast.success(location.state.message);
     }
     if (location.state?.email) {
       setFormData(prev => ({ ...prev, email: location.state.email }));
+      // Clear the email from state so it doesn't persist on refresh or next visit
+      window.history.replaceState({}, document.title);
     }
   }, [location.state]);
 
@@ -92,16 +94,17 @@ function AdminLogin() {
         return;
       }
 
-      // Remove password from stored data
+      // Store admin data
       const { password, ...adminWithoutPassword } = foundAdmin;
       localStorage.setItem("admin", JSON.stringify(adminWithoutPassword));
       localStorage.setItem("isAdminAuthenticated", "true");
       localStorage.setItem("adminLoginTime", new Date().toISOString());
 
-      toast.success(`Welcome back, ${foundAdmin.firstName || "Admin"}!`);
+      // Show success toast
+      toast.success(`Welcome back, ${foundAdmin.firstName || "Admin"}! You are now logged in.`);
 
       setTimeout(() => {
-        navigate("/admin"); // Redirect to main admin dashboard
+        navigate("/admin");
       }, 1500);
     } catch (error) {
       console.error("Admin login error:", error);
@@ -114,7 +117,19 @@ function AdminLogin() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
-      <Navbar /> {/* Navbar added at the top */}
+      <Navbar />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <div className="flex-1 flex items-center justify-center px-4 py-10">
         <div className="w-full max-w-6xl grid lg:grid-cols-2 bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-100">
           {/* Left Side - Purple Admin Section */}
@@ -223,6 +238,7 @@ function AdminLogin() {
                       value={formData.email}
                       onChange={handleChange}
                       required
+                      autoComplete="off" // Disable browser autofill for email
                       className="w-full bg-transparent outline-none text-slate-700 placeholder:text-slate-400"
                     />
                   </div>
@@ -242,6 +258,7 @@ function AdminLogin() {
                       value={formData.password}
                       onChange={handleChange}
                       required
+                      autoComplete="new-password" // Prevent browser from filling saved passwords
                       className="w-full bg-transparent outline-none text-slate-700 placeholder:text-slate-400"
                     />
                     <button

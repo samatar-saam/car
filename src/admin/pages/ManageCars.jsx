@@ -25,7 +25,7 @@ function ManageCars() {
   const [searchTerm, setSearchTerm] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState("all");
-  const [featuredFilter, setFeaturedFilter] = useState("all"); // new filter for featured
+  const [featuredFilter, setFeaturedFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCar, setSelectedCar] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -149,6 +149,14 @@ function ManageCars() {
 
   const removeFeature = (index) => {
     setFeatures(features.filter((_, i) => i !== index));
+  };
+
+  const handleEditChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setEditFormData(prev => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value
+    }));
   };
 
   if (loading) {
@@ -305,7 +313,7 @@ function ManageCars() {
                         {car.category}
                       </span>
                     </td>
-                    <td className="py-3 px-4 font-semibold">${car.pricePerDay}</td>
+                    <td className="py-3 px-4 font-semibold">KES {car.pricePerDay.toLocaleString()}</td>
                     <td className="py-3 px-4">
                       <div className="flex items-center gap-1 text-slate-600">
                         <MapPin className="h-4 w-4" />
@@ -393,8 +401,250 @@ function ManageCars() {
         )}
       </div>
 
-      {/* Edit Modal (unchanged, but featured checkbox already present) */}
-      {/* ... same as before ... */}
+      {/* Edit Modal */}
+      {showEditModal && selectedCar && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+          <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="sticky top-0 bg-white border-b border-slate-200 p-4 flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-slate-900">Edit Car</h2>
+              <button onClick={() => setShowEditModal(false)} className="p-2 hover:bg-slate-100 rounded-full">
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            <form onSubmit={handleUpdate} className="p-6 space-y-5">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Car Name *</label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={editFormData.name}
+                    onChange={handleEditChange}
+                    required
+                    className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-100 outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Brand *</label>
+                  <input
+                    type="text"
+                    name="brand"
+                    value={editFormData.brand}
+                    onChange={handleEditChange}
+                    required
+                    className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-100 outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Category *</label>
+                  <input
+                    type="text"
+                    name="category"
+                    value={editFormData.category}
+                    onChange={handleEditChange}
+                    required
+                    className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-100 outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Price per Day (KES) *</label>
+                  <input
+                    type="number"
+                    name="pricePerDay"
+                    value={editFormData.pricePerDay}
+                    onChange={handleEditChange}
+                    required
+                    className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-100 outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Transmission</label>
+                  <select
+                    name="transmission"
+                    value={editFormData.transmission}
+                    onChange={handleEditChange}
+                    className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:border-purple-500 outline-none"
+                  >
+                    <option value="Automatic">Automatic</option>
+                    <option value="Manual">Manual</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Seats</label>
+                  <input
+                    type="number"
+                    name="seats"
+                    value={editFormData.seats}
+                    onChange={handleEditChange}
+                    className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-100 outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Fuel</label>
+                  <select
+                    name="fuel"
+                    value={editFormData.fuel}
+                    onChange={handleEditChange}
+                    className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:border-purple-500 outline-none"
+                  >
+                    <option value="Petrol">Petrol</option>
+                    <option value="Diesel">Diesel</option>
+                    <option value="Electric">Electric</option>
+                    <option value="Hybrid">Hybrid</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Location *</label>
+                <input
+                  type="text"
+                  name="location"
+                  value={editFormData.location}
+                  onChange={handleEditChange}
+                  required
+                  className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-100 outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Image URL *</label>
+                <input
+                  type="url"
+                  name="image"
+                  value={editFormData.image}
+                  onChange={handleEditChange}
+                  required
+                  className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-100 outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Description</label>
+                <textarea
+                  name="description"
+                  rows="3"
+                  value={editFormData.description}
+                  onChange={handleEditChange}
+                  className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-100 outline-none resize-none"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Features</label>
+                <div className="flex gap-2 mb-2">
+                  <input
+                    type="text"
+                    value={featureInput}
+                    onChange={(e) => setFeatureInput(e.target.value)}
+                    placeholder="e.g., Bluetooth, GPS"
+                    className="flex-1 px-4 py-2 border border-slate-200 rounded-xl focus:border-purple-500 outline-none"
+                  />
+                  <button
+                    type="button"
+                    onClick={addFeature}
+                    className="px-4 py-2 bg-purple-100 text-purple-700 rounded-xl hover:bg-purple-200 transition"
+                  >
+                    Add
+                  </button>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {features.map((feature, idx) => (
+                    <span key={idx} className="inline-flex items-center gap-1 px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-sm">
+                      {feature}
+                      <button
+                        type="button"
+                        onClick={() => removeFeature(idx)}
+                        className="hover:text-purple-900"
+                      >
+                        <X className="h-3 w-3" />
+                      </button>
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-6">
+                <label className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    name="available"
+                    checked={editFormData.available}
+                    onChange={handleEditChange}
+                    className="w-4 h-4 text-purple-600 rounded border-slate-300 focus:ring-purple-500"
+                  />
+                  <span className="text-sm text-slate-700">Available for booking</span>
+                </label>
+                <label className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    name="featured"
+                    checked={editFormData.featured}
+                    onChange={handleEditChange}
+                    className="w-4 h-4 text-purple-600 rounded border-slate-300 focus:ring-purple-500"
+                  />
+                  <span className="text-sm text-slate-700">Feature on homepage</span>
+                </label>
+              </div>
+
+              <div className="flex gap-3 pt-4">
+                <button
+                  type="button"
+                  onClick={() => setShowEditModal(false)}
+                  className="flex-1 border border-slate-300 text-slate-700 py-3 rounded-xl font-semibold hover:bg-slate-50 transition"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="flex-1 bg-purple-600 text-white py-3 rounded-xl font-semibold hover:bg-purple-700 transition disabled:opacity-50"
+                >
+                  {isSubmitting ? "Updating..." : "Update Car"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteModal && carToDelete && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl max-w-md w-full p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-xl font-bold text-slate-900">Delete Car</h3>
+              <button onClick={() => setShowDeleteModal(false)} className="text-slate-400 hover:text-slate-600">
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            <p className="text-slate-600 mb-6">
+              Are you sure you want to delete <span className="font-semibold">{carToDelete.name}</span>? This action cannot be undone.
+            </p>
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowDeleteModal(false)}
+                className="flex-1 border border-slate-300 text-slate-700 py-2 rounded-xl font-medium hover:bg-slate-50"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDelete}
+                className="flex-1 bg-red-600 text-white py-2 rounded-xl font-medium hover:bg-red-700"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

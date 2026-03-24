@@ -321,10 +321,10 @@ function CarDetails() {
                       </span>
                       <span className="font-semibold">{formatKES(car.pricePerDay * days)}</span>
                     </div>
-                    <div className="flex justify-between text-sm mt-2">
+                    {/* <div className="flex justify-between text-sm mt-2">
                       <span className="text-slate-600">Tax (5%)</span>
                       <span className="font-semibold">{formatKES(Math.round(totalPrice * 0.05))}</span>
-                    </div>
+                    </div> */}
                     <div className="flex justify-between text-lg font-bold mt-3 pt-3 border-t border-slate-100">
                       <span>Total</span>
                       <span className="text-purple-600">

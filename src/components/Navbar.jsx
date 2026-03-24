@@ -139,12 +139,7 @@ function Navbar() {
               </span>
             </NavLink>
 
-            <NavLink to="/my-rentals" className={navLinkClass}>
-              <span className="relative">
-                My Rentals
-                <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-purple-500 transition-all duration-300 group-hover:w-full"></span>
-              </span>
-            </NavLink>
+            {/* My Rentals link removed */}
 
             <NavLink to="/about" className={navLinkClass}>
               <span className="relative">
@@ -272,16 +267,7 @@ function Navbar() {
               </span>
             </NavLink>
 
-            <NavLink
-              to="/my-rentals"
-              className={mobileLinkClass}
-              onClick={handleMobileLinkClick}
-            >
-              <span className="flex items-center gap-2">
-                <span className="text-purple-500">📋</span>
-                My Rentals
-              </span>
-            </NavLink>
+            {/* My Rentals link already commented out in mobile */}
 
             <NavLink to="/about" className={mobileLinkClass} onClick={handleMobileLinkClick}>
               <span className="flex items-center gap-2">

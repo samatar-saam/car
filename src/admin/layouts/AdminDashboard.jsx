@@ -49,7 +49,6 @@ function AdminDashboard() {
     { name: "Manage Users", path: "/admin/users", icon: Users },
     { name: "Reports", path: "/admin/reports", icon: BarChart3 },
     { name: "Notifications", path: "/admin/notifications", icon: Bell },
-    { name: "Support", path: "/admin/support", icon: LifeBuoy },
     { name: "Settings", path: "/admin/settings", icon: Settings },
   ];
 

@@ -32,6 +32,16 @@ function MyBookings() {
   const [editTotalPrice, setEditTotalPrice] = useState(0);
   const [editSubmitting, setEditSubmitting] = useState(false);
 
+  // Helper to format KES currency
+  const formatKES = (amount) => {
+    return new Intl.NumberFormat('en-KE', {
+      style: 'currency',
+      currency: 'KES',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(amount);
+  };
+
   useEffect(() => {
     fetchUserBookings();
   }, []);
@@ -246,7 +256,7 @@ function MyBookings() {
                       </div>
                       <div className="flex items-center gap-1">
                         <MapPin className="h-4 w-4" />
-                        <span>{booking.location || "Dubai Marina"}</span>
+                        <span>{booking.location || "Nairobi, Kenya"}</span>
                       </div>
                     </div>
                     <div className="mt-3">
@@ -266,7 +276,7 @@ function MyBookings() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-2xl font-bold text-purple-600">${booking.totalPrice}</p>
+                    <p className="text-2xl font-bold text-purple-600">{formatKES(booking.totalPrice)}</p>
                     <p className="text-sm text-slate-500">Total</p>
                     <div className="mt-2 flex gap-2 justify-end">
                       {booking.status === "confirmed" && (
@@ -377,17 +387,17 @@ function MyBookings() {
                     <div className="mt-4 pt-4 border-t border-slate-200">
                       <div className="flex justify-between text-sm">
                         <span className="text-slate-600">
-                          ${editingBooking.subtotalPerDay} × {editDays} days
+                          {formatKES(editingBooking.subtotalPerDay)} × {editDays} days
                         </span>
-                        <span className="font-semibold">${editingBooking.subtotalPerDay * editDays}</span>
+                        <span className="font-semibold">{formatKES(editingBooking.subtotalPerDay * editDays)}</span>
                       </div>
                       <div className="flex justify-between text-sm mt-2">
                         <span className="text-slate-600">Tax (5%)</span>
-                        <span className="font-semibold">${Math.round((editingBooking.subtotalPerDay * editDays) * 0.05)}</span>
+                        <span className="font-semibold">{formatKES(Math.round((editingBooking.subtotalPerDay * editDays) * 0.05))}</span>
                       </div>
                       <div className="flex justify-between text-lg font-bold mt-3 pt-2 border-t border-slate-200">
                         <span>Total</span>
-                        <span className="text-purple-600">${editTotalPrice.toFixed(2)}</span>
+                        <span className="text-purple-600">{formatKES(editTotalPrice)}</span>
                       </div>
                     </div>
                   )}
